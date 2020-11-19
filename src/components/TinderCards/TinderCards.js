@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import TinderCard from 'react-tinder-card'
 import './TinderCards.css'
 
 const TinderCards = () => {
 
-    const [people, setPeople] = useState([
-        {
-            name: 'Elon Musk',
-            url: 'https://www.biography.com/.image/c_fill%2Ccs_srgb%2Cfl_progressive%2Ch_400%2Cq_auto:good%2Cw_620/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg'
-        },
-        {
-            name: 'Jeff Bezos',
-            url: 'https://www.biography.com/.image/c_fill%2Ccs_srgb%2Cfl_progressive%2Ch_400%2Cq_auto:good%2Cw_620/MTY2NzA3ODE3OTgwMzcyMjYw/jeff-bezos-andrew-harrer_bloomberg-via-getty-images.jpg'
-        },
-        {
-            name: 'Ellen Degeneres',
-            url: 'https://pyxis.nymag.com/v1/imgs/dc6/431/1f2359b510bceecc2722bccc0b19c7a0c2-ellen.rsquare.w1200.jpg'
-        },
-    ])
+    const [people, setPeople] = useState([])
+
+    const fetchCards = () => {
+        axios.get('http://localhost:8001/cards')
+            .then(res => {
+                console.log(res)
+                setPeople(res.data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        fetchCards()
+    }, [])
 
     const swiped = (direction, nameToDelete) => {
         console.log("removing: " + nameToDelete)
@@ -34,13 +35,13 @@ const TinderCards = () => {
                 {people.map(person => (
                     <TinderCard
                         className="swipe"
-                        key={person.name}
+                        key={person._id}
                         preventSwipe={["up", "down"]}
                         onSwipe={dir => swiped(dir, person.name)}
                         onCardLeftScreen={() => outOfFrame(person.name)}
                     >
                         <div
-                            style={{ backgroundImage: `url(${person.url})` }}
+                            style={{ backgroundImage: `url(${person.imgUrl})` }}
                             className="card"
                         >
                             <h3>{person.name}</h3>
