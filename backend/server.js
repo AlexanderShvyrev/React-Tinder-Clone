@@ -4,7 +4,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const connection = "mongodb+srv://admin:nCnFvc87Phr3nay@cluster0.1aduy.mongodb.net/tinderDb?retryWrites=true&w=majority"
+const connection = "mongodb+srv://admin:<password>@cluster0.1aduy.mongodb.net/tinderDb?retryWrites=true&w=majority"
 const Cards = require('./dbCards')
 
 const app = express()
