@@ -15,7 +15,7 @@ const Header = () => {
                 className="header-logo"
                 src="https://1000logos.net/wp-content/uploads/2018/07/tinder-logo.png" alt="" />
             <IconButton>
-                <ForumIcon />
+                <ForumIcon fontSize="large" className="header-icon" />
             </IconButton>
         </div>
     )
