@@ -1,4 +1,3 @@
-//nCnFvc87Phr3nay
 
 //App config
 const express = require('express')
